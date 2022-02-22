@@ -95,7 +95,7 @@ function checkSetupFlagEnv() {
 		NODEBB_ADMIN_PASSWORD_CONFIRM: 'admin:password:confirm',
 		NODEBB_ADMIN_EMAIL: 'admin:email',
 		NODEBB_DATABASE: 'database',
-		NODEBB_MONGO_URI: 'mongo-uri',
+		NODEBB_MONGO_URI: 'mongo:uri',
 	};
 
 	// Set setup values from env vars (if set)
