@@ -46,22 +46,56 @@ questions.optional = [
 	},
 ];
 
+function checkSetupFlag() {
+	let setupVal = install.values;
+
+	try {
+		if (nconf.get('setup')) {
+			setupVal = JSON.parse(nconf.get('setup'));
+		}
+	} catch (err) {
+		winston.error('Invalid json in nconf.get(\'setup\'), ignoring setup values');
+	}
+
+	if (setupVal && typeof setupVal === 'object') {
+		if (setupVal['admin:username'] && setupVal['admin:password'] && setupVal['admin:password:confirm'] && setupVal['admin:email']) {
+			install.values = setupVal;
+		} else {
+			winston.error('Required values are missing for automated setup:');
+			if (!setupVal['admin:username']) {
+				winston.error('  admin:username');
+			}
+			if (!setupVal['admin:password']) {
+				winston.error('  admin:password');
+			}
+			if (!setupVal['admin:password:confirm']) {
+				winston.error('  admin:password:confirm');
+			}
+			if (!setupVal['admin:email']) {
+				winston.error('  admin:email');
+			}
+
+			process.exit();
+		}
+	} else if (nconf.get('database')) {
+		install.values = install.values || {};
+		install.values.database = nconf.get('database');
+	}
+}
+
 function checkSetupFlagEnv() {
 	let setupVal = install.values || {};
 
 	const envConfMap = {
 		NODEBB_URL: 'url',
 		NODEBB_PORT: 'port',
+		NODEDB_SECRET: 'secret',
 		NODEBB_ADMIN_USERNAME: 'admin:username',
 		NODEBB_ADMIN_PASSWORD: 'admin:password',
+		NODEBB_ADMIN_PASSWORD_CONFIRM: 'admin:password:confirm',
 		NODEBB_ADMIN_EMAIL: 'admin:email',
-		NODEBB_DB: 'database',
-		NODEBB_DB_HOST: 'host',
-		NODEBB_DB_PORT: 'port',
-		NODEBB_DB_USER: 'username',
-		NODEBB_DB_PASSWORD: 'password',
-		NODEBB_DB_NAME: 'database',
-		NODEBB_DB_SSL: 'ssl',
+		NODEBB_DATABASE: 'database',
+		NODEBB_MONGO_URI: 'mongo-uri',
 	};
 
 	// Set setup values from env vars (if set)
@@ -115,6 +149,7 @@ function checkSetupFlagEnv() {
 	}
 }
 
+
 function checkCIFlag() {
 	let ciVals;
 	try {
@@ -127,7 +162,7 @@ function checkCIFlag() {
 		if (ciVals.hasOwnProperty('host') && ciVals.hasOwnProperty('port') && ciVals.hasOwnProperty('database')) {
 			install.ciVals = ciVals;
 		} else {
-			winston.error('[install/checkCIFlag] required values are missing for automated CI integration:');
+			winston.error('Required values are missing for automated CI integration:');
 			if (!ciVals.hasOwnProperty('host')) {
 				winston.error('  host');
 			}
@@ -252,35 +287,6 @@ async function enableDefaultTheme() {
 		type: 'local',
 		id: defaultTheme,
 	});
-}
-
-async function createDefaultUserGroups() {
-	const groups = require('./groups');
-	async function createGroup(name) {
-		await groups.create({
-			name: name,
-			hidden: 1,
-			private: 1,
-			system: 1,
-			disableLeave: 1,
-			disableJoinRequests: 1,
-		});
-	}
-
-	const [verifiedExists, unverifiedExists, bannedExists] = await groups.exists([
-		'verified-users', 'unverified-users', 'banned-users',
-	]);
-	if (!verifiedExists) {
-		await createGroup('verified-users');
-	}
-
-	if (!unverifiedExists) {
-		await createGroup('unverified-users');
-	}
-
-	if (!bannedExists) {
-		await createGroup('banned-users');
-	}
 }
 
 async function createAdministrator() {
@@ -553,13 +559,13 @@ async function checkUpgrade() {
 
 install.setup = async function () {
 	try {
+		//checkSetupFlag();
 		checkSetupFlagEnv();
 		checkCIFlag();
 		await setupConfig();
 		await setupDefaultConfigs();
 		await enableDefaultTheme();
 		await createCategories();
-		await createDefaultUserGroups();
 		const adminInfo = await createAdministrator();
 		await createGlobalModeratorsGroup();
 		await giveGlobalPrivileges();
