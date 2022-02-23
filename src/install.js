@@ -475,7 +475,7 @@ async function createWelcomePost() {
 		await Topics.post({
 			uid: 1,
 			cid: 2,
-			title: 'Welcome to your NodeBB!',
+			title: 'Welcome to ViAl community!',
 			content: content,
 		});
 	}
@@ -492,6 +492,8 @@ async function enableDefaultPlugins() {
 		'nodebb-rewards-essentials',
 		'nodebb-plugin-emoji',
 		'nodebb-plugin-emoji-android',
+		'nodebb-plugin-embed',
+		'nodebb-plugin-share-post-icons'
 	];
 	let customDefaults = nconf.get('defaultplugins') || nconf.get('defaultPlugins');
 
