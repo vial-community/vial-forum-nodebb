@@ -1,5 +1,6 @@
 {
-    "title": "NodeBB",
+    "title": "ViAl Community",
+    "title:short": "ViAl",
     "showSiteTitle": 1,
     "defaultLang": "en-GB",
     "loginDays": 14,
@@ -24,7 +25,10 @@
     "newbiePostDelayThreshold": 3,
     "postQueue": 0,
     "postQueueReputationThreshold": 0,
-    "groupsExemptFromPostQueue": ["administrators", "Global Moderators"],
+    "groupsExemptFromPostQueue": [
+        "administrators",
+        "Global Moderators"
+    ],
     "minimumPostLength": 8,
     "maximumPostLength": 32767,
     "systemTags": "",
@@ -160,7 +164,7 @@
     "timeagoCutoff": 30,
     "necroThreshold": 7,
     "categoryWatchState": "watching",
-    "submitPluginUsage": 1,
+    "submitPluginUsage": 0,
     "showAverageApprovalTime": 1,
     "autoApproveTime": 0,
     "maxUserSessions": 10,
