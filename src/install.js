@@ -494,7 +494,7 @@ async function enableDefaultPlugins() {
 		'nodebb-plugin-emoji-android',
 		'nodebb-plugin-embed',
 		'nodebb-plugin-share-post-icons',
-		'nodebb-plugin-s3-uploads-fork'
+		'nodebb-plugin-s3-uploads-digitalocean'
 	];
 	let customDefaults = nconf.get('defaultplugins') || nconf.get('defaultPlugins');
 
