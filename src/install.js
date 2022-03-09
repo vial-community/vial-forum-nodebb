@@ -490,6 +490,7 @@ async function enableDefaultPlugins() {
 		'nodebb-plugin-mentions',
 		'nodebb-widget-essentials',
 		'nodebb-rewards-essentials',
+		'nodebb-plugin-emailer-sendgrid',
 		'nodebb-plugin-emoji',
 		'nodebb-plugin-emoji-android',
 		'nodebb-plugin-embed',

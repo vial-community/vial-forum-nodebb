@@ -173,5 +173,7 @@
     "composer:showHelpTab": 1,
     "composer:allowPluginHelp": 1,
     "maxReconnectionAttempts": 5,
-    "reconnectionDelay": 1500
+    "reconnectionDelay": 1500,
+    "email:from": "TBD",
+    "email:from_name": "ViAl Community Forum"
 }
