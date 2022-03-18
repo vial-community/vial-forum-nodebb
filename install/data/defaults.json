@@ -146,7 +146,7 @@
     "includeUnverifiedEmails": 0,
     "emailPrompt": 1,
     "sendEmailToBanned": 0,
-    "requireEmailAddress": 0,
+    "requireEmailAddress": 1,
     "inviteExpiration": 7,
     "dailyDigestFreq": "off",
     "digestHour": 17,
@@ -175,5 +175,8 @@
     "maxReconnectionAttempts": 5,
     "reconnectionDelay": 1500,
     "email:from": "Vialcommunity2022@gmail.com",
-    "email:from_name": "ViAl Community Forum"
+    "email:from_name": "ViAl Community Forum",
+    "disableCustomUserSkins": 1,
+    "useCustomCSS": 1,
+    "enableLiveReload": 1
 }

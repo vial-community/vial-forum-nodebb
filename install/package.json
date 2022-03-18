@@ -103,6 +103,7 @@
         "nodebb-theme-lavender": "5.3.2",
         "nodebb-theme-persona": "11.3.38",
         "nodebb-theme-slick": "1.4.23",
+        "nodebb-theme-vial": "file:vial/nodebb-theme-vial",
         "nodebb-theme-vanilla": "12.1.17",
         "nodebb-theme-timuu": "^0.2.5",
         "nodebb-widget-essentials": "5.0.7",
