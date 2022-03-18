@@ -10,7 +10,7 @@
 	"scripts": [
 		"lib/client.js",
 		"lib/persona.js",
-		"lib/autohidingnavbar.min.js",
+		"lib/autohidingnavbar.js",
 		"lib/quickreply.js"
 	],
 	"modules": {
