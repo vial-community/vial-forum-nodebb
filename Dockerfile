@@ -18,7 +18,7 @@ COPY --chown=node:node . /usr/src/app
 
 ARG NODEBB_MONGO_CERTIFICATE
 ENV NODEBB_CERT=${NODEBB_MONGO_CERTIFICATE}
-RUN echo ${NODEBB_CERT} > /usr/src/app/ca-certificate.crt
+RUN echo "${NODEBB_CERT}" > /usr/src/app/ca-certificate.crt
 
 ENV NODE_ENV=production \
     daemon=false \
