@@ -16,7 +16,9 @@ RUN npm install --only=prod && \
 
 COPY --chown=node:node . /usr/src/app
 
-RUN echo ${NODEBB_MONGO_CERTIFICATE} > /usr/src/app/ca-cerficate.crt
+ARG NODEBB_MONGO_CERTIFICATE
+ENV NODEBB_CERT=${NODEBB_MONGO_CERTIFICATE}
+RUN echo -e ${NODEBB_CERT} > /usr/src/app/ca-cerficate.crt
 
 ENV NODE_ENV=production \
     daemon=false \
