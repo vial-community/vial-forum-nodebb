@@ -1,0 +1,38 @@
+{
+  "id": "nodebb-plugin-vial-fusionauth",
+  "name": "Fusion OpenID Connect Plugin for NodeBB",
+  "description": "Authenticate to FusionAuth",
+  "url": "",
+  "library": "./library.js",
+  "templates": "templates",
+  "hooks": [
+    {
+      "hook": "static:app.load",
+      "method": "init"
+    },
+    {
+      "hook": "static:user.delete",
+      "method": "deleteUserData"
+    },
+    {
+      "hook": "filter:user.whitelistFields",
+      "method": "whitelistFields"
+    },
+    {
+      "hook": "filter:auth.init",
+      "method": "bindStrategy"
+    },
+    {
+      "hook": "filter:admin.header.build",
+      "method": "bindMenuOption"
+    },
+    {
+      "hook": "action:settings.set",
+      "method": "bindStrategy"
+    },
+    {
+      "hook": "filter:user.logout",
+      "method": "redirectLogout"
+    }
+  ]
+}
