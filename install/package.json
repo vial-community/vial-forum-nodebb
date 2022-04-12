@@ -14,8 +14,7 @@
         "lint": "eslint --cache ./nodebb .",
         "test": "nyc --reporter=html --reporter=text-summary mocha",
         "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info",
-        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage",
-        "postinstall": "cd /usr/src/app/node_modules/nodebb-plugin-vial-fusionauth && npm install"
+        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage"
     },
     "nyc": {
         "exclude": [
