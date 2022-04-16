@@ -121,6 +121,9 @@ exports.build = async function (targets, options) {
 
 	let series = nconf.get('series') || options.series;
 	if (series === undefined) {
+		series = process.env.NODEBB_SERIES;
+	}
+	if (series === undefined) {
 		// Detect # of CPUs and select strategy as appropriate
 		winston.verbose('[build] Querying CPU core count for build strategy');
 		const cpus = os.cpus();
